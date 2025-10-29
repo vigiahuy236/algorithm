@@ -11,7 +11,7 @@ const int N = 1e5 + 6;
 int n, m, s, t;
 long long d[N];
 vector<pair<int, long long>> adj[N];
-
+ 
 void sol() {
     cin >> n >> m >> s >> t;
     while (m--) {
