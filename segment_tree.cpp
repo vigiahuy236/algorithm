@@ -30,7 +30,7 @@ struct segtree {
         }
         return;
     }
-    void build(int id, int l, int r, long long a[N]) {
+    void build(int id, int l, int r, long long a[]) {
         if (l == r) {
             st[id] = a[l];
             return;
