@@ -8,8 +8,6 @@ using namespace std;
 
 const int N = 1e5 + 6;
 const long long inf = (1LL<<62);
-int n, q;
-long long a[N];
 
 struct segtree {
     vector<long long> st, lazy;
@@ -63,7 +61,8 @@ struct segtree {
 };
 
 void sol() {
-    cin >> n >> q;
+    int n, q; cin >> n >> q;
+    long long a[N];
     for (int i = 1; i <= n; i++) cin >> a[i];
     segtree seg(n);
     seg.build(1, 1, n, a);
