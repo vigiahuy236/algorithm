@@ -19,13 +19,13 @@ struct DSU {
         for (int i = 1; i <= _n; i++) p[i] = i;
         for (int i = 1; i <= _n; i++) d[i].push_back(i);
     }
-    int find(int u) {
+    int acs(int u) {
         if (p[u] == u) return u;
-        return p[u] = find(p[u]);
+        return p[u] = acs(p[u]);
     }
-    void add(int u, int v) {
-        int ru = find(u);
-        int rv = find(v);
+    void join(int u, int v) {
+        int ru = acs(u);
+        int rv = acs(v);
         if (ru == rv) return;
         p[ru] = rv;
         freq[rv] += freq[ru];
@@ -33,10 +33,10 @@ struct DSU {
         return;
     }
     int cnt(int u) {
-        return freq[find(u)];
+        return freq[acs(u)];
     }
     bool check(int u, int v) {
-        return find(u) == find(v);
+        return acs(u) == acs(v);
     }
 };
 
@@ -47,13 +47,13 @@ void sol() {
         char type; cin >> type;
         if (type == '1') {
             int u, v; cin >> u >> v;
-            dsu.add(u, v);
+            dsu.join(u, v);
         } else if (type == '2') {
             int u; cin >> u;
             cout << dsu.cnt(u) << "\n";
         } else if (type == '3') {
             int u; cin >> u;
-            int ru = dsu.find(u);
+            int ru = dsu.acs(u);
             for (int x : dsu.d[ru]) cout << x << " ";
             cout << "\n"; 
         } else {
