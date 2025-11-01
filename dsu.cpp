@@ -24,12 +24,12 @@ struct DSU {
         return p[u] = acs(p[u]);
     }
     void join(int u, int v) {
-        int ru = acs(u);
-        int rv = acs(v);
-        if (ru == rv) return;
-        p[ru] = rv;
-        freq[rv] += freq[ru];
-        for (int x : d[ru]) d[rv].push_back(x);
+        u = acs(u);
+        v = acs(v);
+        if (u == v) return;
+        p[u] = v;
+        freq[v] += freq[u];
+        for (int x : d[u]) d[v].push_back(x);
         return;
     }
     int cnt(int u) {
