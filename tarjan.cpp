@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const int N = 1e4 + 5;
+const int N = 1e5 + 5;
 int n, m, timer, cnt, freq[N], low[N];
 vector<int> adj[N];
 stack<int> stk;
