@@ -1,0 +1,55 @@
+/**
+ *    author:  Vi Gia Huy
+**/
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int N = 1e4 + 5;
+int n, m, timer, cnt, freq[N], low[N];
+vector<int> adj[N];
+stack<int> stk;
+
+void dfs(int u) {
+    freq[u] = low[u] = ++timer;
+    stk.push(u);
+    for (int v : adj[u]) {
+        if (freq[v] != 0) low[u] = min(low[u], freq[v]);
+        else {
+            dfs(v);
+            low[u] = min(low[u], low[v]);
+        }
+    }
+    if (low[u] == freq[u]) {
+        cnt++;
+        int v = 0;
+        while (u != v) {
+            v = stk.top();
+            freq[v] = n + 1;
+            stk.pop();
+        }
+    }
+    return;
+}
+
+void sol() {
+    cin >> n >> m;
+    while (m--) {
+        int u, v; cin >> u >> v;
+        adj[u].push_back(v);
+    }
+    for (int i = 1; i <= n; i++) if (freq[i] == 0) dfs(i);
+    cout << cnt;
+    return;
+}
+
+int main() {
+    ios::sync_with_stdio(0); cin.tie(0);
+    freopen("tarjan.inp", "r", stdin);
+    freopen("tarjan.out", "w", stdout);
+    int T = 1;
+    //cin >> T;
+    while (T--) sol();
+    return 0;
+}
