@@ -11,6 +11,7 @@ int n, m, timer, cnt, freq[N], low[N];
 vector<int> adj[N];
 stack<int> stk;
 
+//find SCCs(strongly connected components)
 void dfs(int u) {
     freq[u] = low[u] = ++timer;
     stk.push(u);
