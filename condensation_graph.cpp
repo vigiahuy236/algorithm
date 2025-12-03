@@ -49,6 +49,16 @@ void sol() {
             comp[d[u]].push_back(d[v]);
         }
     }
+    for (int u = 1; u <= _n; u++) {
+        vector<bool> check(_n + 1, false);
+        vector<int> tmp;
+        for (int v : comp[u]) {
+            if (check[v]) continue;
+            tmp.push_back(v);
+            check[v] = true;
+        }
+        comp[u] = tmp;
+    }
     cout << _n << "\n\n";
     for (int u = 1; u <= _n; u++) {
         cout << u << " | ";
