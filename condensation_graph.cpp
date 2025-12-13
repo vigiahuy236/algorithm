@@ -8,26 +8,26 @@ using namespace std;
 
 const int N = 1e5 + 6;
 int n, m, _n, timer;
-int freq[N], low[N], d[N];
+int num[N], low[N], d[N];
 vector<int> adj[N], comp[N], g[N];
 stack<int> stk;
 
 void dfs(int u) {
-    freq[u] = low[u] = ++timer;
+    num[u] = low[u] = ++timer;
     stk.push(u);
     for (int v : adj[u]) {
-        if (freq[v] != 0) low[u] = min(low[u], freq[v]);
+        if (num[v] != 0) low[u] = min(low[u], num[v]);
         else {
             dfs(v);
             low[u] = min(low[u], low[v]);
         }
     }
-    if (low[u] == freq[u]) {
+    if (low[u] == num[u]) {
         _n++;
         int v = 0;
         while (u != v) {
             v = stk.top();
-            freq[v] = n + 1;
+            num[v] = n + 1;
             d[v] = _n;
             g[_n].push_back(v);
             stk.pop();
@@ -42,7 +42,7 @@ void sol() {
         int u, v; cin >> u >> v;
         adj[u].push_back(v);
     }
-    for (int u = 1; u <= n; u++) if (freq[u] == 0) dfs(u);
+    for (int u = 1; u <= n; u++) if (num[u] == 0) dfs(u);
     for (int u = 1; u <= n; u++) {
         for (int v : adj[u]) {
             if (d[u] == d[v]) continue;
